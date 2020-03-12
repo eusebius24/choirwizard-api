@@ -9,13 +9,17 @@ const jsonParser = express.json()
 choirMusicRouter
     .route('/')
     .get((req, res, next) => {
+        console.log(req.app.get('db'));
         ChoirMusicService.getAllMusic(
             req.app.get('db')
         )
             .then(records => {
+                console.log('fetched records', records);
                 res.json(records.map(ChoirMusicService.serializeRecord))
             })
-            .catch(next)
+            .catch(err => {console.log(err);
+            next();
+            })
     })
     .post(jsonParser, (req, res, next) => {
         const { composer, arranger, title, voicing, instrumentation, number_copies, lang, notes } = req.body
