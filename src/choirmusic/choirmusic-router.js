@@ -9,9 +9,9 @@ const jsonParser = express.json()
 choirMusicRouter
     .route('/')
     .get((req, res, next) => {
-        console.log(req.app.get('db'));
+        console.log(req.app.get('db'), req.query.title);
         ChoirMusicService.getAllMusic(
-            req.app.get('db')
+            req.app.get('db'), req.query
         )
             .then(records => {
                 console.log('fetched records', records);
@@ -23,8 +23,8 @@ choirMusicRouter
     })
     .post(jsonParser, (req, res, next) => {
         const { composer, arranger, title, voicing, instrumentation, number_copies, lang, notes } = req.body
-        const newRecord = { composer, arranger, title, voicing, instrumentation, number_copies, lang, notes }
-        
+        const newRecord = { composer, arranger, title, voicing, instrumentation, number_copies: null, lang, notes }
+        console.log(newRecord);
         if(!title) {
             return res.status(400).json({
                 error: { message: `Missing 'title' in request body` }
@@ -35,12 +35,16 @@ choirMusicRouter
             newRecord
         )
             .then(record => {
+                console.log('Record is:', record);
                 res
                     .status(201)
                     .location(path.posix.join(req.originalUrl,`${record.id}`))
                     .json(ChoirMusicService.serializeRecord(record))
             })
-            .catch(next)
+            .catch((err) => {
+                console.log(err)
+                next();
+            })
     })
 
     choirMusicRouter
