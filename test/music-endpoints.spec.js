@@ -2,9 +2,18 @@ const { expect } = require('chai')
 const knex = require('knex')
 const app = require('../src/app')
 const { makeRecordsArray } = require('./choirmusic-fixtures')
-
+const { makeUsersArray } = require('./users.fixtures')
+ 
 describe('Music Endpoints', function() {
     let db 
+
+    const testUsers = makeUsersArray();
+
+    function makeAuthHeader(user) {
+        
+        const token = Buffer.from(`${user.user_name}:${user.password}`).toString('base64')
+        return `Basic ${token}`
+    }
 
     before('make knex knstance', () => {
         db = knex({
@@ -25,6 +34,7 @@ describe('Music Endpoints', function() {
             it(`responds with 200 and an empty list`, () => {
                 return supertest(app)
                     .get('/api/music')
+                    .set('Authorization', makeAuthHeader(testUsers[0]))
                     .expect(200, [])
             })
         })
@@ -46,6 +56,7 @@ describe('Music Endpoints', function() {
             it('removes XSS attack content', () => {
                 return supertest(app)
                     .get(`/api/music`)
+                    .set('Authorization', makeAuthHeader(testUsers[0]))
                     .expect(200)
                     .expect(res => {
                         expect(res.body[0].title).to.eql('Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;')
@@ -62,10 +73,13 @@ describe('Music Endpoints', function() {
                     .into('choir_music')
                     .insert(testMusic)
             })
+
+           
     
             it(`GET /api/music responds with 200 and all of the records in the database`, () => {
                 return supertest(app)
                     .get('/api/music')
+                    .set('Authorization', makeAuthHeader(testUsers[0]))
                     .expect(200, testMusic)
             })
         })
@@ -127,6 +141,8 @@ describe('Music Endpoints', function() {
     })
 
     describe(`POST /api/music`, () => {
+        const testUsers = makeUsersArray();
+
         it(`creates a record, responding with 201 and the new record`, function () {
             const newRecord = {composer: 'Test new composer',
             arranger: '',
@@ -205,7 +221,7 @@ describe('Music Endpoints', function() {
         })
     })
 
-    describe.only(`PATCH /api/music/:music_id`, () => {
+    describe(`PATCH /api/music/:music_id`, () => {
         context(`Given no records`, () => {
             it(`responds with 404`, () => {
                 const recordId = 123456
