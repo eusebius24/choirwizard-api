@@ -7,9 +7,13 @@
 
   * **Success Response**: 
 		`POST` Code: `201`
+		
 		`GET` Code: `200`
+		
 		**Content:**  `{ id: 51, title: “title”, composer: “composer”, arranger: “arranger”, voicing: “voicing”, instrumentation: “instrumentation”, number_copies: 10, lang: “lang”, notes: “notes” }`
+		
 		`PATCH` Code: `204`
+		
 		`DELETE` Code: `204`
 
 	* **Error Response**:
