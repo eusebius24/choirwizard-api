@@ -1,26 +1,23 @@
-# Express Boilerplate!
+# ChoirWizard API Documentation
 
-This is a boilerplate project used for starting new projects!
+**URL**: [https://cryptic-sea-55654.herokuapp.com/api/music/](https://cryptic-sea-55654.herokuapp.com/api/music/)
 
-##Set up
+	* **Method**: `GET`, `POST`, `PATCH`, `DELETE`
+	* **Data Params**: `{ title: “title”, composer: “composer”, arranger: “arranger”, voicing: “voicing”, instrumentation: “instrumentation”, number_copies: 10, lang: “lang”, notes: “notes” }`
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME): 
+  * **Success Response**: 
+		`POST` Code: `201`
+		`GET` Code: `200`
+		**Content:**  `{ id: 51, title: “title”, composer: “composer”, arranger: “arranger”, voicing: “voicing”, instrumentation: “instrumentation”, number_copies: 10, lang: “lang”, notes: “notes” }`
+		`PATCH` Code: `204`
+		`DELETE` Code: `204`
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+	* **Error Response**:
+		`POST` Code: `400`
+		**Content**: ``{ error: { message: `Missing 'title' in request body` } }``
 
-## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+**Sample Calls:**
+  `POST` `fetch('https://cryptic-sea-55654.herokuapp.com/api/music’,{method:'POST', headers: {content-type: 'application/json'}, body: JSON.stringify({title: “title”, composer: “composer”})})`
+	`GET`  `fetch('https://cryptic-sea-55654.herokuapp.com/api/music’)`
+	`PATCH` `fetch('https://cryptic-sea-55654.herokuapp.com/api/music/42’, { method: ‘PATCH’, headers: {content-type: ‘application/json’}, body: JSON.stringify({title: “title”})})`
+	`DELETE`  `fetch('https://cryptic-sea-55654.herokuapp.com/api/music/42’, {method: ‘DELETE’})`
