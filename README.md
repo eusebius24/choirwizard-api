@@ -2,21 +2,21 @@
 
 **URL**: [https://cryptic-sea-55654.herokuapp.com/api/music/](https://cryptic-sea-55654.herokuapp.com/api/music/)
 
-	* **Method**: `GET`, `POST`, `PATCH`, `DELETE`
-	* **Data Params**: `{ title: “title”, composer: “composer”, arranger: “arranger”, voicing: “voicing”, instrumentation: “instrumentation”, number_copies: 10, lang: “lang”, notes: “notes” }`
+* **Method**: `GET`, `POST`, `PATCH`, `DELETE`
+* **Data Params**: `{ title: “title”, composer: “composer”, arranger: “arranger”, voicing: “voicing”, instrumentation: “instrumentation”, number_copies: 10, lang: “lang”, notes: “notes” }`
 
-  * **Success Response**: 
-		`POST` Code: `201`
+ **Success Response**: 
+`POST` Code: `201`
 		
-		`GET` Code: `200`
+`GET` Code: `200`
 		
-		**Content:**  `{ id: 51, title: “title”, composer: “composer”, arranger: “arranger”, voicing: “voicing”, instrumentation: “instrumentation”, number_copies: 10, lang: “lang”, notes: “notes” }`
+**Content:**  `{ id: 51, title: “title”, composer: “composer”, arranger: “arranger”, voicing: “voicing”, instrumentation: “instrumentation”, number_copies: 10, lang: “lang”, notes: “notes” }`
 		
-		`PATCH` Code: `204`
+`PATCH` Code: `204`
 		
-		`DELETE` Code: `204`
+`DELETE` Code: `204`
 
-	* **Error Response**:
+* **Error Response**:
 		`POST` Code: `400`
 		**Content**: ``{ error: { message: `Missing 'title' in request body` } }``
 
