@@ -11,8 +11,7 @@ BEGIN;
         (' ', 'Loomer, Diane', 'Ave maris stella', 'TTBB', 4, 'Latin', 'Unaccompanied', 'Baritone Solo. 1992.'),
         ('Patriquin, Donald', ' ', 'Gentil Coquelicot', 'SSAA', 49, 'French', 'Piano', ' '),
         ('Royal, Matthew', ' ', 'If I Could Walk Out', 'SA', 29, 'English', 'Piano, Violin', 'Solos: Soprano, Alto'),
-        ('Saindon, Marie-Claire', ' ', 'Le train d''
-hiver', 'SSA', 38, 'French', 'Unaccompanied', ' '),
+        ('Saindon, Marie-Claire', ' ', 'Le train d''hiver', 'SSA', 38, 'French', 'Unaccompanied', ' '),
         ('Watson-Henderson, Ruth', ' ', 'Cantate Domino', 'SSAA', 59, 'Latin, English', 'Piano or Organ, Trumpet', 'Soli for 6')
     ;
     COMMIT;
