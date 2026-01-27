@@ -41,15 +41,17 @@ app.get('/debug/db', async (req, res, next) => {
 
 
 app.use(function errorHandler(error, req, res, next) {
-  let response
-  if (NODE_ENV === 'production') {
-    response = { error: { message: 'server error' } }
-  } else {
-    console.error(error)
-    response = { message: error.message, error }
-  }
-  res.status(500).json(response)
-})
+  // ALWAYS log the real error to Render logs
+  console.error('ERROR:', error);
+
+  const response =
+    NODE_ENV === 'production'
+      ? { error: { message: 'server error' } }
+      : { message: error.message, error };
+
+  res.status(500).json(response);
+});
+
 
 
 module.exports = app
