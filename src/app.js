@@ -76,4 +76,12 @@ app.get("/debug/db", async (req, res, next) => {
 app.use(function errorHandler(error, req, res, next) {
   console.error("ERROR:", error);
 
-  const res
+  const response =
+    NODE_ENV === "production"
+      ? { error: { message: "server error" } }
+      : { message: error.message, error };
+
+  res.status(500).json(response);
+});
+
+export default app;
