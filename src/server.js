@@ -10,11 +10,8 @@ console.log('DATABASE_URL =', DATABASE_URL)
 const db = knex({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    port: 5432,
-    user: 'erikareiman',
-    database: 'choirwizard',
-    // password: '', // usually not needed for Postgres.app locally
+    connectionString: DATABASE_URL,
+    ssl: false,
   },
   pool: { min: 0, max: 5, acquireTimeoutMillis: 5000 },
 })
