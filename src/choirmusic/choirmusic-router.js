@@ -1,7 +1,7 @@
-const path = require("path");
-const express = require("express");
-const xss = require("xss");
-const ChoirMusicService = require("./choirmusic-service");
+import path from "path";
+import express from "express";
+import xss from "xss";
+import ChoirMusicService from "./choirmusic-service.js";
 
 const choirMusicRouter = express.Router();
 const jsonParser = express.json();

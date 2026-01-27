@@ -1,7 +1,7 @@
-const path = require("path");
-const express = require("express");
-const xss = require("xss");
-const UsersService = require("./users-service");
+import path from "path";
+import express from "express";
+import xss from "xss";
+import UsersService from "./users-service.js";
 
 const usersRouter = express.Router();
 const jsonParser = express.json();
@@ -66,11 +66,12 @@ usersRouter
   })
   .delete((req, res, next) => {
     UsersService.deleteUser(req.app.get("db"), req.params.user_id)
-      .then((numRowsAffected) => {
-        res.status(204).end;
+      .then(() => {
+        res.status(204).end();
       })
       .catch(next);
   })
+
   .patch(jsonParser, (req, res, next) => {
     const { fullname, username, password } = req.body;
     const userToUpdate = { fullname, username, password };
