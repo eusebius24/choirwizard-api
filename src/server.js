@@ -9,13 +9,14 @@ console.log('DATABASE_URL =', DATABASE_URL)
 
 const db = knex({
   client: 'pg',
-  connection: {
-    connectionString: DATABASE_URL,
-    ssl: false,
-  },
-  pool: { min: 0, max: 5, acquireTimeoutMillis: 5000 },
+  connection: process.env.NODE_ENV === 'production'
+    ? {
+        connectionString: DATABASE_URL,
+        ssl: { rejectUnauthorized: false },
+      }
+    : DATABASE_URL,
+  pool: { min: 0, max: 5, acquireTimeoutMillis: 10000 },
 })
-
 
 
 app.set('db', db)
